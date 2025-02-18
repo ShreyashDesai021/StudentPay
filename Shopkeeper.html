@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopkeeper Panel</title>
+    <style>
+        body {
+            background-color: #E8F1FA;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #4682B4;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .order-section {
+            background-color: #D3E3FC;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4682B4;
+            color: white;
+        }
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h3>Shopkeeper Panel - Print Orders</h3>
+        </div>
+       
+        <div class="order-section">
+            <h5>Pending Orders</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User Name</th>
+                        <th>File Name</th>
+                        <th>Specifications</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>John Doe</td>
+                        <td>document.pdf</td>
+                        <td>Color Print, 2 Copies, Double-Sided</td>
+                        <td>$5</td>
+                        <td><button class="btn btn-success">Mark as Printed</button></td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>Jane Smith</td>
+                        <td>notes.docx</td>
+                        <td>Black & White, 5 Copies, Single-Sided</td>
+                        <td>$8</td>
+                        <td><button class="btn btn-success">Mark as Printed</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       
+        <div class="order-section">
+            <h5>Order History</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User Name</th>
+                        <th>File Name</th>
+                        <th>Specifications</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0001</td>
+                        <td>Michael Lee</td>
+                        <td>report.pdf</td>
+                        <td>Color Print, 3 Copies, Double-Sided</td>
+                        <td>$6</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr>
+                        <td>0002</td>
+                        <td>Sarah Connor</td>
+                        <td>thesis.docx</td>
+                        <td>Black & White, 10 Copies, Back & Forth</td>
+                        <td>$12</td>
+                        <td>Completed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
