@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCET UI</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #E8F1FA;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 100%;
+            margin: auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #4682B4;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .upload-section, .table-section {
+            background-color: #D3E3FC;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4682B4;
+            color: white;
+        }
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        .input-field {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .upload-section {
+            text-align: center;
+            background: linear-gradient(135deg, #D3E3FC, #A0C4FF);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .upload-section h5 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .upload-section .input-field {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        .upload-section .btn-primary {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .upload-section .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="http://www.pccoepune.com/"><img alt="PCCOE LOGO" class="wmh-img-rsp" src="http://www.pccoepune.com/images/pccoe-logo-new.webp" width="100px"></a>
+            <h3>PIMPRI CHINCHWAD COLLEGE OF ENGINEERING</h3>
+            <p>NBA Accredited | NAAC Accredited with 'A' Grade</p>
+        </div>
+     
+      <style>
+              .user-info {
+                  display: flex;
+                  justify-content: space-around;
+                  align-items: center;
+                  background-color: #D3E3FC;
+                  padding: 10px;
+                  border-radius: 10px;
+                  margin-top: 15px;
+                        }
+              .user-details p {
+                  margin: 5px 0;
+              }
+              .user-info i{
+               font-size: 50px;
+            }
+    </style>
+
+<div class="user-info">
+    <i class="fa-regular fa-user"></i>
+    <div class="user-details">
+        <p><strong>Name:</strong> Anup Patel</p>
+        <p><strong>PRN:</strong> 123456789</p>
+        <p><strong>Current Balance:</strong> ₹100</p>
+    </div>
+    <div>
+        <p><strong>Date:</strong> 2024-02-15</p>
+        <button class="btn btn-danger">Logout</button>
+    </div>
+</div>
+     
+        <div class="upload-section">
+            <h5>Upload Attachment</h5>
+            <input type="file" class="input-field">
+            <input type="text" class="input-field" placeholder="Enter File Name">
+            <button class="btn btn-primary">Upload</button>
+        </div>
+        <div class="table-section">
+            <h5>Current Queue</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Current Queue</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Document A</td>
+                        <td>₹10</td>
+                        <td>Pending</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Document B</td>
+                        <td>₹15</td>
+                        <td>Completed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-section">
+            <h5>History</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Date</th>
+                        <th>Attachment Name</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2024-02-10</td>
+                        <td>Report.pdf</td>
+                        <td>₹5</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2024-02-12</td>
+                        <td>Invoice.docx</td>
+                        <td>₹8</td>
+                        <td>Completed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
