@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopkeeper Panel</title>
+    <style>
+        body {
+            background-color: #E8F1FA;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #4682B4;
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .header form {
+            margin-left: auto;
+        }
+        .order-section {
+            background-color: #D3E3FC;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4682B4;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        /* Scrollable Pending Orders */
+        .scrollable-container {
+            max-height: 275px; /* Set a limit for scrolling */
+            overflow-y: auto;
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: red;
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h3>Shopkeeper Panel - Print Orders</h3>
+            <form action="/shopkeeper_login" method="POST">
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+        </div>
+       
+        <div class="order-section">
+            <h5>Pending Orders</h5>
+            <div class="scrollable-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User Name</th>
+                            <th>File Name</th>
+                            <th>Specifications</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% pendingorders.forEach(order => { %>
+                            <tr>
+                                <td><%= order.OrderID %></td>
+                                <td><%= order.student_name %></td>
+                                <td><%= order.filename %></td>
+                                <td><%= order.specifications %></td>
+                                <td>₹<%= order.price %></td>
+                                <td><button class="btn btn-success">Mark as Printed</button></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+       
+        <div class="order-section">
+            <h5>Order History</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User Name</th>
+                        <th>File Name</th>
+                        <th>Specifications</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% ordershistory.forEach(order => { %>
+                        <tr>
+                            <td><%= order.OrderID %></td>
+                            <td><%= order.student_name %></td>
+                            <td><%= order.filename %></td>
+                            <td><%= order.specifications %></td>
+                            <td>₹<%= order.price %></td>
+                            <td><%= order.status %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
