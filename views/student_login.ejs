@@ -8,13 +8,13 @@
 <body>
     <h2>Student Login</h2>
     <form action="/student_login" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required>
+        <label for="prn">PRN :</label>
+        <input type=text name="prn" required>
         <label for="password">Password:</label>
         <input type="password" name="password" required>
         <button type="submit" onclick="">Login</button>
     </form>
-    <button type="button" onclick="redirectTo('student_home')">Sign Up</button>
+    <button type="button" onclick="redirectTo('student_signup')">Sign Up</button>
     <script>
         function redirectTo(page){
             window.location.href = page;

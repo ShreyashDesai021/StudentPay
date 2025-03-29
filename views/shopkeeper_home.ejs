@@ -119,7 +119,9 @@
                                 <td><%= order.filename %></td>
                                 <td><%= order.specifications %></td>
                                 <td>₹<%= order.price %></td>
-                                <td><button class="btn btn-success">Mark as Printed</button></td>
+                                <form method="post" action="/shopkeeper_home/<%= shopkeeper.shopkeeperid %>/mark/<%= order.OrderID %>">
+                                    <td><button class="btn btn-success">Mark as Printed</button></td>
+                                </form>
                             </tr>
                         <% }); %>
                     </tbody>

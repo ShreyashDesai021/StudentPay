@@ -124,8 +124,8 @@
 <div class="user-info">
     <i class="fa-regular fa-user"></i>
     <div class="user-details">
-        <p><strong>Name:</strong> Anup Patel</p>
-        <p><strong>PRN:</strong> 123456789</p>
+        <p><strong>Name:</strong> <%= student.student_name %></p>
+        <p><strong>PRN:</strong> <%= student.prn %></p>
         <p><strong>Current Balance:</strong> ₹100</p>
     </div>
     <div>
@@ -147,23 +147,20 @@
                     <tr>
                         <th>Index</th>
                         <th>Current Queue</th>
-                        <th>Price</th>
+                        <th>Specifications</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Document A</td>
-                        <td>₹10</td>
-                        <td>Pending</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Document B</td>
-                        <td>₹15</td>
-                        <td>Completed</td>
-                    </tr>
+                    <% pendingorders.forEach((order,index) => { %>
+                        <tr>
+                            <td><%= index+1 %></td>
+                            <td><%= order.filename %></td>
+                            <td><%= order.specifications %></td>
+                            <td><%= order.status %></td>
+                            
+                        </tr>
+                        <% }) %>
                 </tbody>
             </table>
         </div>
@@ -172,28 +169,25 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Index</th>
-                        <th>Date</th>
-                        <th>Attachment Name</th>
+                        <th>Order ID</th>
+                        <th>User Name</th>
+                        <th>File Name</th>
+                        <th>Specifications</th>
                         <th>Price</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2024-02-10</td>
-                        <td>Report.pdf</td>
-                        <td>₹5</td>
-                        <td>Completed</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2024-02-12</td>
-                        <td>Invoice.docx</td>
-                        <td>₹8</td>
-                        <td>Completed</td>
-                    </tr>
+                    <% orderhistory.forEach((order,index) => { %>
+                        <tr>
+                            <td><%= index+1 %></td>
+                            <td><%= order.student_name %></td>
+                            <td><%= order.filename %></td>
+                            <td><%= order.specifications %></td>
+                            <td>₹<%= order.price %></td>
+                            <td><%= order.status %></td>
+                        </tr>
+                    <% }); %>
                 </tbody>
             </table>
         </div>

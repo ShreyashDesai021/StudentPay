@@ -45,18 +45,21 @@ app.post("/shopkeeper_login", (req, res) => {
             console.log("Incorrect password");
             return res.render("shopkeeper_login");
         }
-        let seependingorders = `SELECT * FROM pendingorders ORDER BY OrderID`;
-        let seeorderhistory = `SELECT * FROM orderhistory ORDER BY OrderID`;
+        res.redirect(`/shopkeeper_home/${shopkeeper.shopkeeperid}`);
+    });
+});
+
+app.get("/shopkeeper_home/:id",(req,res)=>{
+    const {id} = req.params;
+    let q = `SELECT * FROM shopkeeper WHERE shopkeeperid = ?`;
+    let seependingorders = `SELECT * FROM pendingorders ORDER BY OrderID`;
+    let seeorderhistory = `SELECT * FROM orderhistory ORDER BY OrderID`;
+    connection.query(q,[id],(err,result_shopkeeper)=>{
+        let shopkeeper = result_shopkeeper[0];
         connection.query(seependingorders, (err, result_pending_orders) => {
-            if (err) {
-                console.error("Error fetching pending orders:", err);
-                return res.status(500).send("Error fetching pending orders");
-            }
+            if (err) throw err;
             connection.query(seeorderhistory, (err, result_orders_history) => {
-                if (err) {
-                    console.error("Error fetching order history:", err);
-                    return res.status(500).send("Error fetching order history");
-                }
+                if (err) throw err;
                 res.render("shopkeeper_home", {
                     shopkeeper: shopkeeper,
                     pendingorders: result_pending_orders || [],
@@ -66,6 +69,17 @@ app.post("/shopkeeper_login", (req, res) => {
         });
     });
 });
+    
+
+//mark as printed
+
+app.post("/shopkeeper_home/:id/mark/:orderid",(req,res)=>{
+    const {id, orderid}= req.params;
+    let q1= `call MoveOrderToHistory(?)`;
+    connection.query(q1,[orderid],(err,result_moved)=>{
+        res.redirect(`/shopkeeper_home/${id}`);
+    })
+})
 
 //student
 app.get("/student_login",(req,res)=>{
@@ -73,14 +87,14 @@ app.get("/student_login",(req,res)=>{
 });
 
 app.post("/student_login",(req,res)=>{
-    const {username,password} = req.body;
-    let q=`SELECT * FROM student WHERE username = ?`;
-    connection.query(q,[username] , (err, result)=>{
+    const {prn,password} = req.body;
+    let q=`SELECT * FROM student WHERE prn = ?`;
+    connection.query(q,[prn], (err, result)=>{
         if (err) throw err;
         if (result.length > 0) {
             const student = result[0];
             if(password == student.password){
-                res.render("student_home",{student});
+                res.redirect(`/student_home/${student.prn}`);
             }
             else{
                 console.log("wrong pwd");
@@ -91,6 +105,42 @@ app.post("/student_login",(req,res)=>{
         }
     })
 });
+
+app.get("/student_home/:prn", (req, res) => {
+    const { prn } = req.params;
+    let qStudent = `SELECT * FROM student WHERE prn = ?`;
+    let qPending = `SELECT * FROM pendingorders WHERE student_name = ?`;
+    let qHistory = `SELECT * FROM orderhistory WHERE student_name = ?`;
+
+    connection.query(qStudent, [prn], (err, resultStudent) => {
+        if (err) {
+            console.error("Error fetching student:", err);
+            return res.status(500).send("Internal Server Error");
+        }
+
+        if (resultStudent.length === 0) {
+            return res.status(404).send("Student not found");
+        }
+
+        const student = resultStudent[0];
+
+        connection.query(qPending, [student.student_name], (err, pendingOrders) => {
+            if (err) throw err;
+
+            connection.query(qHistory, [student.student_name], (err, orderHistory) => {
+                if (err) throw err;
+
+                res.render("student_home", {
+                    student,
+                    pendingorders : pendingOrders || [],
+                    orderhistory: orderHistory || []
+                });
+            });
+        });
+    });
+});
+
+
 
 app.get("/student_home",(req,res)=>{
     res.render("student_home");
