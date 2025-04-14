@@ -4,87 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopkeeper Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
-            background-color: #E8F1FA;
-            font-family: Arial, sans-serif;
+            background-color: #F4F7FC;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
         }
         .container {
             width: 90%;
-            margin: auto;
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         .header {
-            background-color: #4682B4;
+            background-color: #0056b3;
             color: white;
-            padding: 15px;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px 12px 0 0;
         }
-        .header-title {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            margin: 0;
-            font-size: 1.5rem;
+        .header h3 {
+            margin: 10px 0 5px;
+            font-size: 24px;
         }
         .header form {
-            margin-left: auto;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .header .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .header .btn-primary:hover {
+            background-color: #0056b3;
         }
         .order-section {
-            background-color: #D3E3FC;
-            padding: 15px;
+            background-color: #E8F1FA;
+            padding: 20px;
             border-radius: 10px;
-            margin-top: 15px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-        
+        .order-section h5 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
         }
-
         th, td {
-            padding: 8px;
-            text-align: left;
             border: 1px solid #ddd;
+            padding: 12px;
+            font-size: 14px;
+            vertical-align: middle;
         }
-
         th {
-            background-color: #4682B4;
+            background-color: #0056b3;
             color: white;
-            position: sticky;
-            top: 0;
-            z-index: 2;
+            font-weight: bold;
         }
-
-        /* Scrollable Pending Orders */
-        .scrollable-container {
-            max-height: 275px; /* Set a limit for scrolling */
-            overflow-y: auto;
-            border: 1px solid #ddd;
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
-
+        tr:hover {
+            background-color: #f1f1f1;
+        }
         .btn {
-            padding: 8px 12px;
+            padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
         }
-
         .btn-primary {
-            background-color: red;
+            background-color: #007bff;
             color: white;
         }
-
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
         .btn-success {
             background-color: #28a745;
             color: white;
+        }
+        .btn-success:hover {
+            background-color: #218838;
         }
     </style>
 </head>
@@ -106,9 +131,12 @@
                             <th>Order ID</th>
                             <th>User Name</th>
                             <th>File Name</th>
-                            <th>Specifications</th>
+                            <th>type</th>
+                            <th>copies</th>
+                            <th>side</th>
                             <th>Price</th>
                             <th>Action</th>
+                            <th>File</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -117,11 +145,20 @@
                                 <td><%= order.OrderID %></td>
                                 <td><%= order.student_name %></td>
                                 <td><%= order.filename %></td>
-                                <td><%= order.specifications %></td>
+                                <td><%= order.type %></td>
+                                <td><%= order.copies %></td>
+                                <td><%= order.side %></td>
                                 <td>₹<%= order.price %></td>
-                                <form method="post" action="/shopkeeper_home/<%= shopkeeper.shopkeeperid %>/mark/<%= order.OrderID %>">
-                                    <td><button class="btn btn-success">Mark as Printed</button></td>
-                                </form>
+                                <td>
+                                    <form method="post" action="/shopkeeper_home/<%= shopkeeper.shopkeeperid %>/mark/<%= order.OrderID %>">
+                                        <button class="btn btn-success">Mark as Printed</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <a href="/uploads/<%= order.file_data %>" target="_blank">
+                                        <button class="btn">Open</button>
+                                    </a>
+                                </td>
                             </tr>
                         <% }); %>
                     </tbody>
@@ -137,7 +174,9 @@
                         <th>Order ID</th>
                         <th>User Name</th>
                         <th>File Name</th>
-                        <th>Specifications</th>
+                        <th>type</th>
+                        <th>copies</th>
+                        <th>side</th>
                         <th>Price</th>
                         <th>Status</th>
                     </tr>
@@ -148,7 +187,9 @@
                             <td><%= order.OrderID %></td>
                             <td><%= order.student_name %></td>
                             <td><%= order.filename %></td>
-                            <td><%= order.specifications %></td>
+                            <td><%= order.type %></td>
+                            <td><%= order.copies %></td>
+                            <td><%= order.side %></td>
                             <td>₹<%= order.price %></td>
                             <td><%= order.status %></td>
                         </tr>

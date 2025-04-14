@@ -2,7 +2,7 @@ const express = require("express");
 const app =express();
 const path = require("path");
 const mysql = require("mysql2");
-const { urlencoded } = require("body-parser");
+
 
 app.use(express.urlencoded({extended:true}));
 app.set("view engine", "ejs")
@@ -75,7 +75,7 @@ app.get("/shopkeeper_home/:id",(req,res)=>{
 
 app.post("/shopkeeper_home/:id/mark/:orderid",(req,res)=>{
     const {id, orderid}= req.params;
-    let q1= `call MoveOrderToHistory(?)`;
+    let q1= `call MoveOrderToHistory(?)`;   
     connection.query(q1,[orderid],(err,result_moved)=>{
         res.redirect(`/shopkeeper_home/${id}`);
     })
@@ -140,6 +140,62 @@ app.get("/student_home/:prn", (req, res) => {
     });
 });
 
+
+const multer = require("multer");
+
+// Storage setup
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '/uploads'));
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+app.post("/upload/:prn", upload.single('file'), (req, res) => {
+    const { prn } = req.params;
+    const { filename, type, copies, side } = req.body;
+    const fileData = req.file.filename;
+
+    const price = type === "color" ? 5 * parseInt(copies) : 1 * parseInt(copies);
+
+    let qStudent = `SELECT student_name FROM student WHERE prn = ?`;
+    connection.query(qStudent, [prn], (err, result) => {
+        if (err || result.length === 0) return res.status(500).send("Student error");
+
+        const student_name = result[0].student_name;
+
+        const qInsert = `INSERT INTO pendingorders (student_name, filename, file_data, type, copies, side, price, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'Pending')`;
+
+        connection.query(qInsert, [student_name, filename, fileData, type, copies, side, price], (err, result) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send("Upload failed");
+            }
+            res.redirect(`/student_home/${prn}`);
+        });
+    });
+});
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
+app.post("/shopkeeper_home/:id/mark/:orderid", (req, res) => {
+    const { id, orderid } = req.params;
+
+    const qMove = `CALL MoveOrderToHistory(?)`; // Assuming you have this procedure in MySQL
+
+    connection.query(qMove, [orderid], (err, result) => {
+        if (err) {
+            console.error("Error moving to history:", err);
+            return res.status(500).send("Error marking order");
+        }
+        res.redirect(`/shopkeeper_home/${id}`);
+    });
+});
 
 
 app.get("/student_home",(req,res)=>{

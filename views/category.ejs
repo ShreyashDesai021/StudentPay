@@ -1,17 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Selection</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #e0f7fa, #e1bee7);
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    button {
+      background-color: #6200ea;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      margin: 10px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3700b3;
+    }
+  </style>
 </head>
 <body>
-    <button type="button" onclick="redirectTo('shopkeeper_login')">Shopkeeper</button>
-    <button type="button" onclick="redirectTo('student_login')">Student</button>
-    <script>
-        function redirectTo(page){
-            window.location.href = page;
-        }
-    </script>
+  <div class="container">
+    <h1>Select Your Role</h1>
+    <button onclick="redirectTo('shopkeeper_login')">Shopkeeper</button>
+    <button onclick="redirectTo('student_login')">Student</button>
+  </div>
+
+  <script>
+    function redirectTo(page) {
+      window.location.href = page;
+    }
+  </script>
 </body>
 </html>

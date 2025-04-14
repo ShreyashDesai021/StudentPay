@@ -4,167 +4,226 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PCET UI</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
-            background-color: #E8F1FA;
-            font-family: Arial, sans-serif;
+            background-color: #F4F7FC;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
         }
         .container {
-            width: 100%;
-            margin: auto;
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         .header {
-            background-color: #4682B4;
+            background-color: #0056b3;
             color: white;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
-            border-radius: 10px 10px 0 0;
+            border-radius: 12px 12px 0 0;
         }
-        .upload-section, .table-section {
-            background-color: #D3E3FC;
+        .header img {
+            margin-bottom: 10px;
+        }
+        .header h3 {
+            margin: 10px 0 5px;
+            font-size: 24px;
+        }
+        .header p {
+            font-size: 14px;
+            margin: 0;
+        }
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #E8F1FA;
             padding: 15px;
             border-radius: 10px;
-            margin-top: 15px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #f9f9f9;
+        .user-details p {
+            margin: 5px 0;
+            font-size: 14px;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #4682B4;
-            color: white;
+        .user-info i {
+            font-size: 50px;
+            color: #0056b3;
         }
         .btn {
-            padding: 8px 12px;
+            padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
         }
         .btn-primary {
             background-color: #007bff;
             color: white;
         }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
         .btn-danger {
             background-color: #dc3545;
             color: white;
         }
-        .input-field {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        .btn-danger:hover {
+            background-color: #a71d2a;
         }
         .upload-section {
             text-align: center;
             background: linear-gradient(135deg, #D3E3FC, #A0C4FF);
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         .upload-section h5 {
-            font-size: 18px;
-            margin-bottom: 10px;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
         }
         .upload-section .input-field {
-            width: calc(100% - 20px);
-            padding: 10px;
+            width: calc(100% - 30px);
+            padding: 12px;
             margin: 10px 0;
             border-radius: 8px;
             border: 1px solid #ccc;
+            font-size: 14px;
         }
         .upload-section .btn-primary {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 16px;
             border-radius: 8px;
-            transition: 0.3s;
         }
-        .upload-section .btn-primary:hover {
+        .table-section {
+            background-color: #F9FAFB;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .table-section h5 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+        th {
             background-color: #0056b3;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .history-section {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <a href="http://www.pccoepune.com/"><img alt="PCCOE LOGO" class="wmh-img-rsp" src="http://www.pccoepune.com/images/pccoe-logo-new.webp" width="100px"></a>
+            <a href="http://www.pccoepune.com/"><img alt="PCCOE LOGO" src="http://www.pccoepune.com/images/pccoe-logo-new.webp" width="100px"></a>
             <h3>PIMPRI CHINCHWAD COLLEGE OF ENGINEERING</h3>
             <p>NBA Accredited | NAAC Accredited with 'A' Grade</p>
         </div>
-     
-      <style>
-              .user-info {
-                  display: flex;
-                  justify-content: space-around;
-                  align-items: center;
-                  background-color: #D3E3FC;
-                  padding: 10px;
-                  border-radius: 10px;
-                  margin-top: 15px;
-                        }
-              .user-details p {
-                  margin: 5px 0;
-              }
-              .user-info i{
-               font-size: 50px;
-            }
-    </style>
 
-<div class="user-info">
-    <i class="fa-regular fa-user"></i>
-    <div class="user-details">
-        <p><strong>Name:</strong> <%= student.student_name %></p>
-        <p><strong>PRN:</strong> <%= student.prn %></p>
-        <p><strong>Current Balance:</strong> ₹100</p>
-    </div>
-    <div>
-        <p><strong>Date:</strong> 2024-02-15</p>
-        <button class="btn btn-danger">Logout</button>
-    </div>
-</div>
-     
+        <div class="user-info">
+            <i class="fa-regular fa-user"></i>
+            <div class="user-details">
+                <p><strong>Name:</strong> <%= student.student_name %></p>
+                <p><strong>PRN:</strong> <%= student.prn %></p>
+                <p><strong>Current Balance:</strong> ₹<%= student.balance %></p>
+            </div>
+            <div>
+                <p><strong>Date:</strong> 2024-02-15</p>
+                <button class="btn btn-danger">Logout</button>
+            </div>
+        </div>
+
         <div class="upload-section">
             <h5>Upload Attachment</h5>
-            <input type="file" class="input-field">
-            <input type="text" class="input-field" placeholder="Enter File Name">
-            <button class="btn btn-primary">Upload</button>
+            <form action="/upload/<%= student.prn %>" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" class="input-field" required>
+                <input type="text" name="filename" class="input-field" placeholder="Enter File Name" required>
+
+                <select name="type" class="input-field" required>
+                    <option value="">-- Select Print Type --</option>
+                    <option value="black and white">Black and White</option>
+                    <option value="color">Color</option>
+                </select>
+
+                <input type="number" name="copies" class="input-field" placeholder="Number of Copies" required>
+
+                <select name="side" class="input-field" required>
+                    <option value="">-- Select Side --</option>
+                    <option value="single">Single Sided</option>
+                    <option value="double">Double Sided</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
         </div>
+
         <div class="table-section">
             <h5>Current Queue</h5>
             <table>
                 <thead>
                     <tr>
                         <th>Index</th>
-                        <th>Current Queue</th>
-                        <th>Specifications</th>
+                        <th>File Name</th>
+                        <th>Type</th>
+                        <th>Copies</th>
+                        <th>Side</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% pendingorders.forEach((order,index) => { %>
+                    <% pendingorders.forEach((order, index) => { %>
                         <tr>
-                            <td><%= index+1 %></td>
+                            <td><%= index + 1 %></td>
                             <td><%= order.filename %></td>
-                            <td><%= order.specifications %></td>
+                            <td><%= order.type %></td>
+                            <td><%= order.copies %></td>
+                            <td><%= order.side %></td>
                             <td><%= order.status %></td>
-                            
                         </tr>
-                        <% }) %>
+                    <% }) %>
                 </tbody>
             </table>
         </div>
-        <div class="table-section">
+
+        <div class="table-section history-section">
             <h5>History</h5>
             <table>
                 <thead>
@@ -172,22 +231,26 @@
                         <th>Order ID</th>
                         <th>User Name</th>
                         <th>File Name</th>
-                        <th>Specifications</th>
+                        <th>Type</th>
+                        <th>Copies</th>
+                        <th>Side</th>
                         <th>Price</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% orderhistory.forEach((order,index) => { %>
+                    <% orderhistory.forEach((order, index) => { %>
                         <tr>
-                            <td><%= index+1 %></td>
+                            <td><%= index + 1 %></td>
                             <td><%= order.student_name %></td>
                             <td><%= order.filename %></td>
-                            <td><%= order.specifications %></td>
+                            <td><%= order.type %></td>
+                            <td><%= order.copies %></td>
+                            <td><%= order.side %></td>
                             <td>₹<%= order.price %></td>
                             <td><%= order.status %></td>
                         </tr>
-                    <% }); %>
+                    <% }) %>
                 </tbody>
             </table>
         </div>
